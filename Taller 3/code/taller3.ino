@@ -38,19 +38,15 @@ void turnOnLed(int ledNumber)
   switch(ledNumber) 
   {
   	case 1: // Case 1: turn on the green LED.
-      turnOffLeds();
       digitalWrite(GREEN_LED, HIGH);
       break;
     case 2: // Case 2: turn on the blue LED.
-      turnOffLeds();
       digitalWrite(BLUE_LED, HIGH);
       break;
     case 3: // Case 3: turn on the yellow LED.
-      turnOffLeds();
       digitalWrite(YELLOW_LED, HIGH);
       break;
     case 4: // Case 4: turn on the red LED.
-      turnOffLeds();
       digitalWrite(RED_LED, HIGH);
     default: // default: do nothing.
       break;
@@ -62,20 +58,20 @@ void turnOnLed(int ledNumber)
  * returns: void.
  * Turn off all the LEDs.
  */
-void turnOffLeds(int ledNumber)
+void turnOffLed(int ledNumber)
 {
     switch(ledNumber) 
     {
-  	case 1:
+  	case 1: // Case 1: turn off the green LED.
           digitalWrite(GREENLED, LOW);
       break;
-      case 2:
+      case 2:  // Case 2: turn off the blue LED.
          digitalWrite(BLUELED, LOW);
       break;
-    case 3:
+    case 3:  // Case 3: turn on the yellow LED.
       digitalWrite(YELLOWLED, LOW);
       break;
-    case 4:
+    case 4:  // Case 4: turn on the red LED.
       digitalWrite(REDLED, LOW);
     default:
       break;
