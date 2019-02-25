@@ -62,19 +62,20 @@ void turnOffLed(int ledNumber)
 {
     switch(ledNumber) 
     {
-  	case 1: // Case 1: turn off the green LED.
-          digitalWrite(GREENLED, LOW);
-      break;
-      case 2:  // Case 2: turn off the blue LED.
-         digitalWrite(BLUELED, LOW);
-      break;
-    case 3:  // Case 3: turn on the yellow LED.
-      digitalWrite(YELLOWLED, LOW);
-      break;
-    case 4:  // Case 4: turn on the red LED.
-      digitalWrite(REDLED, LOW);
-    default:
-      break;
+         case 1: // Case 1: turn off the green LED.
+             digitalWrite(GREEN_LED, LOW);
+             break;
+         case 2:  // Case 2: turn off the blue LED.
+             digitalWrite(BLUE_LED, LOW);
+             break;
+         case 3:  // Case 3: turn off the yellow LED.
+             digitalWrite(YELLOW_LED, LOW);
+             break;
+         case 4:  // Case 4: turn off the red LED.
+             digitalWrite(RED_LED, LOW);
+	     break;
+         default:
+         break;
   }
 }
 
@@ -121,7 +122,7 @@ void core()
   } else if (potenMeterV < 256 && potenMeterV > 0)  // Turn on 4 and turn off the Green, Blue and Red LED
   { 
     turnOffLed(1);
-    turnOffLed(3)
+    turnOffLed(3);
     turnOffLed(3);
     turnOnLed(4);
   }
