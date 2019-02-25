@@ -58,16 +58,28 @@ void turnOnLed(int ledNumber)
 }
 
 /**
- * parameters: none.
+ * parameters: ledNumber -> int.
  * returns: void.
  * Turn off all the LEDs.
  */
-void turnOffLeds()
+void turnOffLeds(int ledNumber)
 {
-  digitalWrite(RED_LED, LOW);
-  digitalWrite(BLUE_LED, LOW);
-  digitalWrite(GREEN_LED, LOW);
-  digitalWrite(YELLOW_LED, LOW);
+    switch(ledNumber) 
+    {
+  	case 1:
+          digitalWrite(GREENLED, LOW);
+      break;
+      case 2:
+         digitalWrite(BLUELED, LOW);
+      break;
+    case 3:
+      digitalWrite(YELLOWLED, LOW);
+      break;
+    case 4:
+      digitalWrite(REDLED, LOW);
+    default:
+      break;
+  }
 }
 
 /**
@@ -92,17 +104,29 @@ void core()
   potenMeterV = analogRead(POTENTIOMETER); // Reads the 'value' of the potentiometer
   printsVoltage(potenMeterV);              // Prints the potentiometer's voltage
 
-  if (potenMeterV <= 1023 && potenMeterV >= 767)      // Turn on the green LED
+  if (potenMeterV <= 1023 && potenMeterV >= 767)  // Turn on all the LEDs
   {
     turnOnLed(1);
-  } else if (potenMeterV < 767 && potenMeterV >= 511) // Turn on the blue LED
-  { 
     turnOnLed(2);
-  } else if (potenMeterV < 511 && potenMeterV >= 256) // Turn on the yellow LED
-  { 
     turnOnLed(3);
-  } else if (potenMeterV < 256 && potenMeterV > 0)    // Turn on the red LED
+    turnOnLed(4);
+  } else if (potenMeterV < 767 && potenMeterV >= 511) // Turn on 2, 3, 4 and turn off the Green LED
   { 
+    turnOffLed(1);
+    turnOnLed(2);
+    turnOnLed(3);
+    turnOnLed(4);
+  } else if (potenMeterV < 511 && potenMeterV >= 256) // Turn on 3, 4 and turn off the Green and Blue LED
+  { 
+    turnOffLed(1);
+    turnOffLed(2);
+    turnOnLed(3);
+    turnOnLed(4);
+  } else if (potenMeterV < 256 && potenMeterV > 0)  // Turn on 4 and turn off the Green, Blue and Red LED
+  { 
+    turnOffLed(1);
+    turnOffLed(3)
+    turnOffLed(3);
     turnOnLed(4);
   }
 }
