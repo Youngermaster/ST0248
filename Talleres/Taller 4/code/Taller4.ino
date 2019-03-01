@@ -16,7 +16,7 @@
 #define SNL 5 // This is for a sensor level, indicates the minimum water level.
 #define SNH 4 // This is for a sensor level, indicates the maximum water level.
 #define EV 8 // This is for a electro valve of 12 Volts, It allows the passage of water.
-#define BH 9 // This is for a hydraulic bomb, It fills the tank to the maximum level. 
+#define BH 9 // This is for a hydraulic pump, It fills the tank to the maximum level. 
 #define AM 13 // This is a mechanical agitator.
 
 unsigned int counter = 0;  // This variable will be iterable for do cycles.
@@ -47,25 +47,25 @@ void shake()
  */
 void core()
 {
-    while(digitalRead(STOP) == LOW)
+    while(digitalRead(STOP) == LOW) // while we don't push STOP button this will be execute.
     {
-      if (digitalRead(START) == HIGH)
-        startCondition = true;
+      if (digitalRead(START) == HIGH) // If We push START button we allow the access to the next methods.
+        startCondition = true; // Changes to true the startCondition boolean.
         
-      if (startCondition) 
+      if (startCondition) // If previously we push START this will be executed.
       {
-        while(digitalRead(SNH) == LOW)
-          digitalWrite(BH, HIGH);
+        while(digitalRead(SNH) == LOW) // While water don't reach the maximum level this will be executed.
+          digitalWrite(BH, HIGH); // Keeps the hydraulic pump open. 
         
-          digitalWrite(BH, LOW);
-          shake();
-        counter = 0;
-        digitalWrite(BH, LOW);
-        while (digitalRead(SNL) == LOW) 
-          digitalWrite(EV, HIGH);
+          digitalWrite(BH, LOW); // Close the hydraulic pump.
+          shake(); // Calls the shake method.
+        counter = 0; // Set the iterable counter to zero.
+        digitalWrite(BH, LOW); // Close the hydraulic pump.
+        while (digitalRead(SNL) == LOW) // While water don't reach the minimum level this will be executed.
+          digitalWrite(EV, HIGH); // Keeps the electro valve open.
 
-        digitalWrite(EV, LOW);
-        startCondition = false;
+        digitalWrite(EV, LOW); // Close the electro valve.
+        startCondition = false; // Set the startCondition to false.
       }
     }
 }
@@ -77,18 +77,18 @@ void core()
  */
 void setup()
 {
-  pinMode(START, INPUT);
-  pinMode(STOP, INPUT);
-  pinMode(SNL, INPUT);
-  pinMode(SNH, INPUT);
-  pinMode(EV, OUTPUT);
-  pinMode(BH, OUTPUT);
-  pinMode(AM, OUTPUT);
+  pinMode(START, INPUT); // Defines START as INPUT.
+  pinMode(STOP, INPUT); // Defines STOP as INPUT.
+  pinMode(SNL, INPUT); // Defines SNL as INPUT.
+  pinMode(SNH, INPUT); // Defines SNH as INPUT.
+  pinMode(EV, OUTPUT); // Defines EV as OUTPUT.
+  pinMode(BH, OUTPUT); // Defines BH as OUTPUT.
+  pinMode(AM, OUTPUT); // Defines AM as OUTPUT.
 
-  digitalWrite(EV, LOW);
-  digitalWrite(BH, LOW);
-  digitalWrite(AM, LOW);
-  Serial.begin(9600);
+  digitalWrite(EV, LOW); // Close the electro valve.
+  digitalWrite(BH, LOW); // Close the hydraulic pump.
+  digitalWrite(AM, LOW); // Turn off the agitator motor.
+  Serial.begin(9600); // Sets the data rate in bits per second (baud) for serial data transmission.
 }
 
 /**
@@ -98,5 +98,5 @@ void setup()
  */
 void loop()
 {
-  core();
+  core(); // Calls the core function.
 }
