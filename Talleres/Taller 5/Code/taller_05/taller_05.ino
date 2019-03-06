@@ -1,5 +1,18 @@
-#define LBLUE 3
-#define LGREEN 5
+/**
+  Electrónica Digital
+  Taller 4
+  Members:
+           - Camila Barona Cabrera
+           - Maria Antonia Rincón
+           - Valeria Suarez
+           - Sofia Uribe
+           - Juan Manuel Young Hoyos
+  Teacher: David Velásquez
+*/
+
+#define TS 0
+#define LGREEN 3
+#define LBLUE 5
 #define LRED 6
 #define LA 7
 #define LB 8
@@ -10,18 +23,19 @@
 #define LG 13
 
 
-int modMethod(float temperature)
-{
-  if (temperature >= 1000)
-    return (int) temperature % 1000;
-  
-  else if (temperature < 1000 && temperature >= 100)
-    return (int) temperature % 100;
+float temperature;
 
+float getTemperatureOnCelsius(float temperature)
+{
+  return (temperature * 500) / 1024;
+}
+
+int getUnit(float temperature)
+{
   return (int) temperature % 10;
 }
 
-void turnOnDisplay(byte a, byte b, byte c, byte d, byte e, byte f, byte g)
+void turnOnDisplay(int a, int b, int c, int d, int e, int f, int g)
 {
   digitalWrite(LA, a);
   digitalWrite(LB, b);
@@ -32,7 +46,7 @@ void turnOnDisplay(byte a, byte b, byte c, byte d, byte e, byte f, byte g)
   digitalWrite(LG, g);
 }
 
-void encenderNumero(byte number)
+void showNumber(int number)
 {
   switch (number)
   {
@@ -78,7 +92,7 @@ void encenderNumero(byte number)
   }
 }
 
-void turnOnRGBLED(byte color)
+void turnOnRGBLED(int color)
 {
   switch (color)
   {
@@ -102,12 +116,55 @@ void turnOnRGBLED(byte color)
   }
 }
 
-void setup() {
-  // put your setup code here, to run once:
+void core()
+{
+  temperature = analogRead(TS);
+  Serial.println(temperature);
+  temperature = getTemperatureOnCelsius(temperature);
+  Serial.println(temperature);
+  Serial.println(getUnit(temperature));
+  
+  showNumber(getUnit(temperature));
+
+  if (temperature > 32) 
+    turnOnRGBLED(3);
+  else if (temperature <= 32 && temperature > 30)
+    turnOnRGBLED(2);
+  else if(temperature <= 28)
+    turnOnRGBLED(1);
+  
+  delay(2000);
+}
+
+void setup() 
+{
+  pinMode(LBLUE, OUTPUT);
+  pinMode(LGREEN, OUTPUT);
+  pinMode(LRED, OUTPUT);
+  pinMode(LA, OUTPUT);
+  pinMode(LB, OUTPUT);
+  pinMode(LC, OUTPUT);
+  pinMode(LD, OUTPUT);
+  pinMode(LE, OUTPUT);
+  pinMode(LF, OUTPUT);
+  pinMode(LG, OUTPUT);
+
+  digitalWrite(LBLUE, LOW);
+  digitalWrite(LGREEN, LOW);
+  digitalWrite(LRED, LOW);
+  digitalWrite(LA, LOW);
+  digitalWrite(LB, LOW);
+  digitalWrite(LC, LOW);
+  digitalWrite(LD, LOW);
+  digitalWrite(LE, LOW);
+  digitalWrite(LF, LOW);
+  digitalWrite(LG, LOW);
+
+  Serial.begin(9600);
 
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop() 
+{
+  core();
 }
