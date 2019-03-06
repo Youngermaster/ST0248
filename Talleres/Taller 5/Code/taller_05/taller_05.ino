@@ -51,43 +51,43 @@ void showNumber(int number)
   switch (number)
   {
     case 0:
-      turnOnDisplay(1, 1, 1, 1, 1, 1, 0); // 0
+      turnOnDisplay(0, 0, 0, 0, 0, 0, 1); // 0
       break;
 
     case 1:
-      turnOnDisplay(0, 1, 1, 0, 0, 0, 0); // 1
+      turnOnDisplay(1, 0, 0, 1, 1, 1, 1); // 1
       break;
 
     case 2:
-      turnOnDisplay(1, 1, 0, 1, 1, 0, 1); // 2
+      turnOnDisplay(0, 0, 1, 0, 0, 1, 0); // 2
       break;
 
     case 3:
-      turnOnDisplay(1, 1, 1, 1, 0, 0, 1); // 3
+      turnOnDisplay(0, 0, 0, 0, 1, 1, 0); // 3
       break;
 
     case 4:
-      turnOnDisplay(0, 1, 1, 0, 0, 1, 1); // 4
+      turnOnDisplay(1, 0, 0, 1, 1, 0, 0); // 4
       break;
 
     case 5:
-      turnOnDisplay(1, 0, 1, 1, 0, 1, 1); // 5
+      turnOnDisplay(0, 1, 0, 0, 1, 0, 0); // 5
       break;
 
     case 6:
-      turnOnDisplay(1, 0, 1, 1, 1, 1, 1); // 6
+      turnOnDisplay(0, 1, 0, 0, 0, 0, 0); // 6
       break;
 
     case 7:
-      turnOnDisplay(1, 1, 1, 0, 0, 0, 0); // 7
+      turnOnDisplay(0, 0, 0, 1, 1, 1, 1); // 7
       break;
 
     case 8:
-      turnOnDisplay(1, 1, 1, 1, 1, 1, 1); // 8
+      turnOnDisplay(0, 0, 0, 0, 0, 0, 0); // 8
       break;
 
     case 9:
-      turnOnDisplay(1, 1, 1, 1, 0, 1, 1); // 9
+      turnOnDisplay(0, 0, 0, 1, 1, 0, 0); // 9
       break;
   }
 }
@@ -123,7 +123,7 @@ void core()
   temperature = getTemperatureOnCelsius(temperature);
   Serial.println(temperature);
   Serial.println(getUnit(temperature));
-  
+
   showNumber(getUnit(temperature));
 
   if (temperature > 32) 
