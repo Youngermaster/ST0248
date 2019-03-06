@@ -10,21 +10,25 @@
   Teacher: David Velásquez
 */
 
-#define TS 0
-#define LGREEN 3
-#define LBLUE 5
-#define LRED 6
-#define LA 7
-#define LB 8
-#define LC 9
-#define LD 10
-#define LE 11
-#define LF 12
-#define LG 13
+#define TS 0 // This PIN refers to the temperature sensor
+#define LGREEN 3 // This PIN refers to green value of LED RGB
+#define LBLUE 5 // This PIN refers to blue value of LED RGB
+#define LRED 6 // This PIN refers to red value of LED RGB
+#define LA 2 // This PIN refers to 'a' LED of the seven-segment display (SSD).
+#define LB 3 // This PIN refers to 'b' LED of the seven-segment display (SSD).
+#define LC 4 // This PIN refers to 'c' LED of the seven-segment display (SSD).
+#define LD 5 // This PIN refers to 'd' LED of the seven-segment display (SSD).
+#define LE 6 // This PIN refers to 'e' LED of the seven-segment display (SSD).
+#define LF 7 // This PIN refers to 'f' LED of the seven-segment display (SSD).
+#define LG 8 // This PIN refers to 'g' LED of the seven-segment display (SSD).
 
+float temperature; // Saves the temperature of the environment.
 
-float temperature;
-
+/**
+ * @parameters temperature -> float
+ * @return temperature times 500 and divide by 1024
+ * This method returns the temperature on Celcius (°C)
+ */
 float getTemperatureOnCelsius(float temperature)
 {
   return (temperature * 500) / 1024;
@@ -166,5 +170,14 @@ void setup()
 
 void loop() 
 {
-  core();
+  //core();
+  int counter = 0;
+
+  while(counter < 10)
+  {
+    showNumber(counter);
+    counter++;
+    delay(1000);
+  }
+  counter = 0;
 }
